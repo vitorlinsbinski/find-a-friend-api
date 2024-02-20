@@ -1,21 +1,23 @@
 import { describe, expect, it, beforeEach } from 'vitest';
 import { InMemoryOrganizationsRepository } from '../repositories/in-memory/in-memory-organizations-repository';
-import { AuthenticateOrganizationUseCase } from './authenticate-organization';
 import { hash } from 'bcryptjs';
 import { InMemoryAddressesRepository } from '@/repositories/in-memory/in-memory-adddresses-repository';
-import { GetOrganizationDetailsUseCase } from './get-organization-details';
+import { GetOrganizationProfileUseCase } from './get-organization-profile';
 import { ResourceNotFoundError } from './erros/resource-not-found-error';
 
 let organizationsRepository: InMemoryOrganizationsRepository;
 let addressesRepository: InMemoryAddressesRepository;
-let sut: GetOrganizationDetailsUseCase;
+let sut: GetOrganizationProfileUseCase;
 
 describe('Authenticate Organization Use Case', () => {
   beforeEach(() => {
     organizationsRepository = new InMemoryOrganizationsRepository();
     addressesRepository = new InMemoryAddressesRepository();
 
-    sut = new GetOrganizationDetailsUseCase(organizationsRepository);
+    sut = new GetOrganizationProfileUseCase(
+      organizationsRepository,
+      addressesRepository
+    );
   });
 
   it('should be able to get profile details of an organization', async () => {
