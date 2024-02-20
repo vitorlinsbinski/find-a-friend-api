@@ -1,12 +1,12 @@
 import { describe, expect, it, beforeEach } from 'vitest';
 import { InMemoryOrganizationsRepository } from '../repositories/in-memory/in-memory-organizations-repository';
-import { AuthenticateOrganizationUseCase } from './authenticate-organization';
 import { hash } from 'bcryptjs';
 import { InMemoryAddressesRepository } from '@/repositories/in-memory/in-memory-adddresses-repository';
 import { CreatePetUseCase } from './create-pet';
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository';
 import { AdoptionRequirementsRepository } from '@/repositories/adoption-requirements-repository';
-import { InMemoryAdoptionRequirements } from '@/repositories/in-memory/in-memory-adoption-requireements';
+import { InMemoryAdoptionRequirementsRepository } from '@/repositories/in-memory/in-memory-adoption-requirements-repository';
+import { NonExistingOrganizationError } from './erros/nonexisting-organization-error';
 
 let organizationsRepository: InMemoryOrganizationsRepository;
 let addressesRepository: InMemoryAddressesRepository;
@@ -19,9 +19,14 @@ describe('Create Pet Use Case', () => {
     organizationsRepository = new InMemoryOrganizationsRepository();
     addressesRepository = new InMemoryAddressesRepository();
     petsRepository = new InMemoryPetsRepository();
-    adoptionRequirementsRepository = new InMemoryAdoptionRequirements();
+    adoptionRequirementsRepository =
+      new InMemoryAdoptionRequirementsRepository();
 
-    sut = new CreatePetUseCase(petsRepository, adoptionRequirementsRepository);
+    sut = new CreatePetUseCase(
+      petsRepository,
+      adoptionRequirementsRepository,
+      organizationsRepository
+    );
   });
 
   it('should be able to create a pet', async () => {
@@ -46,7 +51,7 @@ describe('Create Pet Use Case', () => {
     const { pet } = await sut.execute({
       name: 'Thor',
       about: "Thor's about",
-      age: 4,
+      age: 'ADULTO',
       size: 'PEQUENO',
       energy_level: 4,
       independency_level: 'BAIXO',
@@ -68,5 +73,21 @@ describe('Create Pet Use Case', () => {
 
     expect(pet.id).toEqual(expect.any(String));
     expect(pet.name).toEqual('Thor');
+  });
+
+  it('should not be able to create a pet without a organizaiton registered', async () => {
+    await expect(() =>
+      sut.execute({
+        name: 'Thor',
+        about: "Thor's about",
+        age: 'FILHOTE',
+        size: 'PEQUENO',
+        energy_level: 4,
+        independency_level: 'BAIXO',
+        city: 'São Paulo',
+        state: 'SP',
+        organization_id: 'nonexisting-org-id',
+      })
+    ).rejects.toBeInstanceOf(NonExistingOrganizationError);
   });
 });

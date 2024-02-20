@@ -4,6 +4,7 @@ import { AuthenticateOrganizationUseCase } from './authenticate-organization';
 import { hash } from 'bcryptjs';
 import { InMemoryAddressesRepository } from '@/repositories/in-memory/in-memory-adddresses-repository';
 import { GetOrganizationDetailsUseCase } from './get-organization-details';
+import { ResourceNotFoundError } from './erros/resource-not-found-error';
 
 let organizationsRepository: InMemoryOrganizationsRepository;
 let addressesRepository: InMemoryAddressesRepository;
@@ -42,5 +43,13 @@ describe('Authenticate Organization Use Case', () => {
 
     expect(organization.id).toEqual(expect.any(String));
     expect(organization.title).toEqual('Pets Org');
+  });
+
+  it('should not be able to get profile details of a nonexisting organization', async () => {
+    await expect(() =>
+      sut.execute({
+        organizationId: 'nonexisting-organization-id',
+      })
+    ).rejects.toBeInstanceOf(ResourceNotFoundError);
   });
 });

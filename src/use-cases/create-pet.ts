@@ -1,6 +1,8 @@
 import { AdoptionRequirementsRepository } from '@/repositories/adoption-requirements-repository';
+import { OrganizationsRepository } from '@/repositories/organizations-repository';
 import { PetsRepository } from '@/repositories/pets-repository';
 import { Pet } from '@prisma/client';
+import { NonExistingOrganizationError } from './erros/nonexisting-organization-error';
 
 interface AdotionRequirement {
   title: string;
@@ -9,7 +11,7 @@ interface AdotionRequirement {
 interface CreatePetUseCaseRequest {
   name: string;
   about: string;
-  age: number;
+  age: 'FILHOTE' | 'ADULTO' | 'IDOSO';
   size: 'PEQUENO' | 'MEDIO' | 'GRANDE';
   energy_level: number;
   independency_level: 'BAIXO' | 'MEDIO' | 'ALTO';
@@ -27,7 +29,8 @@ interface CreatePetUseCaseResponse {
 export class CreatePetUseCase {
   constructor(
     private petsRepository: PetsRepository,
-    private adoptionRequirementsRepository: AdoptionRequirementsRepository
+    private adoptionRequirementsRepository: AdoptionRequirementsRepository,
+    private organizationsRepository: OrganizationsRepository
   ) {}
 
   async execute({
@@ -43,6 +46,13 @@ export class CreatePetUseCase {
     organization_id,
     adoption_requirements,
   }: CreatePetUseCaseRequest): Promise<CreatePetUseCaseResponse> {
+    const organization =
+      await this.organizationsRepository.findById(organization_id);
+
+    if (!organization) {
+      throw new NonExistingOrganizationError();
+    }
+
     const pet = await this.petsRepository.create({
       name,
       about,

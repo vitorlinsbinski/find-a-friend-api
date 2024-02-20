@@ -41,7 +41,7 @@ describe('Fetch Nearby Pets Use Case', () => {
     await petsRepository.create({
       name: 'Thor',
       about: "Thor's about",
-      age: 4,
+      age: 'ADULTO',
       size: 'PEQUENO',
       energy_level: 4,
       independency_level: 'BAIXO',
@@ -71,7 +71,7 @@ describe('Fetch Nearby Pets Use Case', () => {
     await petsRepository.create({
       name: 'Nick',
       about: "Nick's about",
-      age: 1,
+      age: 'FILHOTE',
       size: 'PEQUENO',
       energy_level: 2,
       independency_level: 'BAIXO',

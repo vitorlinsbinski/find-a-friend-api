@@ -2,7 +2,7 @@ import { AdoptionRequirement, Prisma } from '@prisma/client';
 import { AdoptionRequirementsRepository } from '../adoption-requirements-repository';
 import { randomUUID } from 'node:crypto';
 
-export class InMemoryAdoptionRequirements
+export class InMemoryAdoptionRequirementsRepository
   implements AdoptionRequirementsRepository
 {
   public items: AdoptionRequirement[] = [];

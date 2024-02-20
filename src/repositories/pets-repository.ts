@@ -8,7 +8,7 @@ export interface FindManyNearbyParams {
 export interface FindManyNearbyParamsWithFilter {
   city: string;
   state: string;
-  age?: number;
+  age?: 'FILHOTE' | 'ADULTO' | 'IDOSO';
   energy_level?: number;
   size?: 'PEQUENO' | 'MEDIO' | 'GRANDE';
   independency_level?: 'BAIXO' | 'MEDIO' | 'GRANDE';

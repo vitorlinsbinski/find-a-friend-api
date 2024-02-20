@@ -5,22 +5,30 @@ import { InMemoryAddressesRepository } from '@/repositories/in-memory/in-memory-
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository';
 import { FetchNearbyPetsWithFilterUseCase } from './fetch-nearby-pets-with-filter';
 import { GetPetDetailsUseCase } from './get-pet-details';
+import { ResourceNotFoundError } from './erros/resource-not-found-error';
+import { InMemoryAdoptionRequirementsRepository } from '@/repositories/in-memory/in-memory-adoption-requirements-repository';
 
 let organizationsRepository: InMemoryOrganizationsRepository;
 let addressesRepository: InMemoryAddressesRepository;
 let petsRepository: InMemoryPetsRepository;
+let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
 let sut: GetPetDetailsUseCase;
 
-describe('Fetch Nearby Pets With Filter Use Case', () => {
+describe('Get Pet Details by ID Use Case', () => {
   beforeEach(() => {
     organizationsRepository = new InMemoryOrganizationsRepository();
     addressesRepository = new InMemoryAddressesRepository();
     petsRepository = new InMemoryPetsRepository();
+    adoptionRequirementsRepository =
+      new InMemoryAdoptionRequirementsRepository();
 
-    sut = new GetPetDetailsUseCase(petsRepository);
+    sut = new GetPetDetailsUseCase(
+      petsRepository,
+      adoptionRequirementsRepository
+    );
   });
 
-  it('should be able to fetch nearby pets with filter', async () => {
+  it('should be able to get pet details', async () => {
     const organization = await organizationsRepository.create({
       title: 'Org. 1',
       responsible_name: 'John Doe',
@@ -43,7 +51,7 @@ describe('Fetch Nearby Pets With Filter Use Case', () => {
       id: 'pet-01',
       name: 'Thor',
       about: "Thor's about",
-      age: 4,
+      age: 'FILHOTE',
       size: 'PEQUENO',
       energy_level: 4,
       independency_level: 'BAIXO',
@@ -56,7 +64,7 @@ describe('Fetch Nearby Pets With Filter Use Case', () => {
       id: 'pet-02',
       name: 'Max',
       about: "Max's about",
-      age: 2,
+      age: 'FILHOTE',
       size: 'MEDIO',
       energy_level: 2,
       independency_level: 'BAIXO',
@@ -69,7 +77,7 @@ describe('Fetch Nearby Pets With Filter Use Case', () => {
       id: 'pet-03',
       name: 'Jack',
       about: "Jack's about",
-      age: 2,
+      age: 'FILHOTE',
       size: 'PEQUENO',
       energy_level: 4,
       independency_level: 'MEDIO',
@@ -84,5 +92,13 @@ describe('Fetch Nearby Pets With Filter Use Case', () => {
 
     expect(pet.id).toEqual('pet-02');
     expect(pet.name).toEqual('Max');
+  });
+
+  it('should not be able to get pet details with a nonexistent pet ID', async () => {
+    await expect(() =>
+      sut.execute({
+        petId: 'nonexistent-pet-id',
+      })
+    ).rejects.toBeInstanceOf(ResourceNotFoundError);
   });
 });

@@ -48,11 +48,17 @@ enum PetIndepencyLevel {
   ALTO
 }
 
+enum PetAge {
+  FILHOTE
+  ADULTO
+  IDOSO
+}
+
 model Pet {
   id                 String            @id @default(uuid())
   name               String
   about              String            @db.Text
-  age                Int
+  age                PetAge
   size               PetSize
   energy_level       Int
   independency_level PetIndepencyLevel
