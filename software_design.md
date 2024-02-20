@@ -9,7 +9,7 @@
   [x] create-pet
   [x] fetch-nearby-pets
   [x] fetch-filtered-nearby-pets
-  [] get-pet-details
+  [x] get-pet-details
 
 ## Repositories
 

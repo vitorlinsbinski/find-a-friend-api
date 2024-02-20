@@ -11,7 +11,7 @@ export interface FindManyNearbyParamsWithFilter {
   age?: 'FILHOTE' | 'ADULTO' | 'IDOSO';
   energy_level?: number;
   size?: 'PEQUENO' | 'MEDIO' | 'GRANDE';
-  independency_level?: 'BAIXO' | 'MEDIO' | 'GRANDE';
+  independency_level?: 'BAIXO' | 'MEDIO' | 'ALTO';
 }
 
 export interface PetsRepository {
