@@ -1,9 +1,9 @@
 ## Use-cases
 
 - Organization
-  [] register-organization
-  [] authenticate-organization
-  [] get-organization-details
+  [x] register-organization
+  [x] authenticate-organization
+  [x] get-organization-details
 
 - Pet
   [] create-pet

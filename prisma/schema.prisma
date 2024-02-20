@@ -52,7 +52,7 @@ model Pet {
   id                 String            @id @default(uuid())
   name               String
   about              String            @db.Text
-  age                String
+  age                Int
   size               PetSize
   energy_level       Int
   independency_level PetIndepencyLevel
@@ -60,7 +60,7 @@ model Pet {
   city               String
   state              String
 
-  org                 Organization          @relation(fields: [organization_id], references: [id])
+  organization        Organization          @relation(fields: [organization_id], references: [id])
   organization_id     String
   AdoptionRequirement AdoptionRequirement[]
 
