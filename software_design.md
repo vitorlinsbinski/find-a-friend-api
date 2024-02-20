@@ -6,15 +6,15 @@
   [x] get-organization-details
 
 - Pet
-  [] create-pet
-  [] fetch-nearby-pets
-  [] fetch-filtered-nearby-pets
+  [x] create-pet
+  [x] fetch-nearby-pets
+  [x] fetch-filtered-nearby-pets
   [] get-pet-details
 
 ## Repositories
 
-[] Organization Repository
-[] Pet Repository
+[x] Organization Repository
+[x] Pet Repository
 
 ## Controllers
 

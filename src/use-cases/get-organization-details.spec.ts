@@ -17,7 +17,7 @@ describe('Authenticate Organization Use Case', () => {
     sut = new GetOrganizationDetailsUseCase(organizationsRepository);
   });
 
-  it('should be able to authenticate as a organization', async () => {
+  it('should be able to get profile details of an organization', async () => {
     const organizationRegistered = await organizationsRepository.create({
       title: 'Pets Org',
       responsible_name: 'John Doe',

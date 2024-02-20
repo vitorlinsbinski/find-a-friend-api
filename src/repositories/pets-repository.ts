@@ -5,11 +5,13 @@ export interface FindManyNearbyParams {
   state: string;
 }
 
-export interface FindManyNearbyParamsWithFilter extends FindManyNearbyParams {
-  age: number;
-  energy_level: number;
-  size: 'PEQUENO' | 'MEDIO' | 'GRANDE';
-  independency_level: 'BAIXO' | 'MEDIO' | 'GRANDE';
+export interface FindManyNearbyParamsWithFilter {
+  city: string;
+  state: string;
+  age?: number;
+  energy_level?: number;
+  size?: 'PEQUENO' | 'MEDIO' | 'GRANDE';
+  independency_level?: 'BAIXO' | 'MEDIO' | 'GRANDE';
 }
 
 export interface PetsRepository {

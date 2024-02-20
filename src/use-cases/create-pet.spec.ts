@@ -14,7 +14,7 @@ let petsRepository: InMemoryPetsRepository;
 let adoptionRequirementsRepository: AdoptionRequirementsRepository;
 let sut: CreatePetUseCase;
 
-describe('Authenticate Organization Use Case', () => {
+describe('Create Pet Use Case', () => {
   beforeEach(() => {
     organizationsRepository = new InMemoryOrganizationsRepository();
     addressesRepository = new InMemoryAddressesRepository();

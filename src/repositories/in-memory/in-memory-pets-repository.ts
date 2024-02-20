@@ -1,4 +1,4 @@
-import { $Enums, Pet, Prisma } from '@prisma/client';
+import { Pet, Prisma } from '@prisma/client';
 import {
   FindManyNearbyParams,
   FindManyNearbyParamsWithFilter,
@@ -36,15 +36,30 @@ export class InMemoryPetsRepository implements PetsRepository {
     size,
   }: FindManyNearbyParamsWithFilter) {
     const pets = this.items.filter((item) => {
-      return (
-        item.city === city &&
-        item.state === state &&
-        Number(item.age) === age &&
-        item.energy_level === energy_level &&
-        item.independency_level &&
-        independency_level &&
-        item.size === size
-      );
+      if (item.city !== city || item.state !== state) {
+        return false;
+      }
+
+      if (age !== undefined && item.age !== age) {
+        return false;
+      }
+
+      if (energy_level !== undefined && item.energy_level !== energy_level) {
+        return false;
+      }
+
+      if (
+        independency_level !== undefined &&
+        item.independency_level !== independency_level
+      ) {
+        return false;
+      }
+
+      if (size !== undefined && item.size !== size) {
+        return false;
+      }
+
+      return true;
     });
 
     return pets;
