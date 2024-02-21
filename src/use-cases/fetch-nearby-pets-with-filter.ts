@@ -1,5 +1,4 @@
 import { PetsRepository } from '@/repositories/pets-repository';
-import { Pet } from '@prisma/client';
 
 interface FetchNearbyPetsWithFilterUseCaseRequest {
   city: string;
@@ -11,7 +10,12 @@ interface FetchNearbyPetsWithFilterUseCaseRequest {
 }
 
 interface FetchNearbyPetsWithFilterUseCaseResponse {
-  pets: Pet[];
+  pets: {
+    id: string;
+    name: string;
+    about: string;
+    organization_id: string;
+  }[];
 }
 
 export class FetchNearbyPetsWithFilterUseCase {
@@ -34,6 +38,17 @@ export class FetchNearbyPetsWithFilterUseCase {
       size,
     });
 
-    return { pets };
+    const petsFormatted = pets.map((item) => {
+      const { id, name, about, organization_id } = item;
+
+      return {
+        id,
+        name,
+        about,
+        organization_id,
+      };
+    });
+
+    return { pets: petsFormatted };
   }
 }

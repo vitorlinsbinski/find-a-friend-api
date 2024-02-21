@@ -87,7 +87,5 @@ describe('Fetch Nearby Pets Use Case', () => {
 
     expect(pets).toHaveLength(1);
     expect(pets[0].name).toEqual('Nick');
-    expect(pets[0].city).toEqual('Rio de Janeiro');
-    expect(pets[0].state).toEqual('RJ');
   });
 });

@@ -19,7 +19,7 @@ interface CreatePetUseCaseRequest {
   city: string;
   state: string;
   organization_id: string;
-  adoption_requirements?: AdotionRequirement[];
+  adoption_requirements?: string[];
 }
 
 interface CreatePetUseCaseResponse {
@@ -69,7 +69,7 @@ export class CreatePetUseCase {
     if (adoption_requirements) {
       const adoptionRequirements = adoption_requirements.map((item) => {
         return {
-          title: item.title,
+          title: item,
           pet_id: pet.id,
         };
       });

@@ -5,5 +5,5 @@ export interface AdoptionRequirementsRepository {
 
   create(
     data: Prisma.AdoptionRequirementUncheckedCreateInput[]
-  ): Promise<AdoptionRequirement[]>;
+  ): Promise<void>;
 }

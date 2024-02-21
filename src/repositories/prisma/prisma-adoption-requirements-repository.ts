@@ -16,11 +16,11 @@ export class PrismaAdoptionRequirementsRepository
   }
 
   async create(data: Prisma.AdoptionRequirementUncheckedCreateInput[]) {
-    const adoptionRequirements = await prisma.$queryRaw<AdoptionRequirement[]>`
-    INSERT INTO "AdoptionRequirement" ("title", "pet_id")
-    VALUES ${data.map((d) => `('${d.title}', '${d.pet_id}')`).join(',')}
-  `;
+    const adoptionRequirementsCreated =
+      await prisma.adoptionRequirement.createMany({
+        data,
+      });
 
-    return adoptionRequirements;
+    return;
   }
 }

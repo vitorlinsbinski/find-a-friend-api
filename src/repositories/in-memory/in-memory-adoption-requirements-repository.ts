@@ -16,7 +16,7 @@ export class InMemoryAdoptionRequirementsRepository
   }
 
   async create(data: Prisma.AdoptionRequirementUncheckedCreateInput[]) {
-    const adoptionRequirements = data.map((item) => {
+    data.map((item) => {
       const requirement = {
         id: item.id ?? randomUUID(),
         title: item.title,
@@ -28,6 +28,6 @@ export class InMemoryAdoptionRequirementsRepository
       return requirement;
     });
 
-    return adoptionRequirements;
+    return;
   }
 }

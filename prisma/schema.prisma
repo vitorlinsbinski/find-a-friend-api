@@ -16,7 +16,7 @@ model Organization {
   password_hash    String
 
   Pet     Pet[]
-  Address Address[]
+  Address Address?
 
   @@map("organizations")
 }
@@ -30,7 +30,7 @@ model Address {
   street       String
   number       Int
 
-  org             Organization @relation(fields: [organization_id], references: [id])
+  organization    Organization @relation(fields: [organization_id], references: [id])
   organization_id String       @unique
 
   @@map("addresses")
@@ -69,6 +69,7 @@ model Pet {
   organization        Organization          @relation(fields: [organization_id], references: [id])
   organization_id     String
   AdoptionRequirement AdoptionRequirement[]
+  PetImage            PetImage[]
 
   @@map("pets")
 }
@@ -81,4 +82,14 @@ model AdoptionRequirement {
   pet_id String
 
   @@map("adoption_requirements")
+}
+
+model PetImage {
+  id       String @id @default(uuid())
+  url_path String
+
+  pet    Pet    @relation(fields: [pet_id], references: [id])
+  pet_id String
+
+  @@map("pet_images")
 }

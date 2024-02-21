@@ -20,8 +20,14 @@ export class PrismaPetsRepository implements PetsRepository {
   async findManyNearby({ city, state }: FindManyNearbyParams) {
     const pets = await prisma.pet.findMany({
       where: {
-        city,
-        state,
+        city: {
+          contains: city,
+          mode: 'insensitive',
+        },
+        state: {
+          contains: state,
+          mode: 'insensitive',
+        },
       },
     });
 
@@ -36,9 +42,15 @@ export class PrismaPetsRepository implements PetsRepository {
     independency_level,
     size,
   }: FindManyNearbyParamsWithFilter) {
-    const where: Prisma.PetWhereInput = {
-      city,
-      state,
+    let where: Prisma.PetWhereInput = {
+      city: {
+        contains: city,
+        mode: 'insensitive',
+      },
+      state: {
+        contains: state,
+        mode: 'insensitive',
+      },
     };
 
     if (age !== undefined) {

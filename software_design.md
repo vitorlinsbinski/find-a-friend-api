@@ -19,11 +19,12 @@
 ## Controllers
 
 - Organizations
-  [] register (POST /organizations)
-  [] authenticate (POST /session)
-  [] details (GET /organizations)
+  [x] register (POST /organizations)
+  [x] authenticate (POST /session)
+  [x] refresh token (PATCH /token/refresh)
+  [x] profile (GET /organizations/profile)
 
 - Pets
-  [] create (POST /pets)
-  [] nearby (GET /pets/nearby)
-  [] filtered-nearby (GET /pets/nearby/filter)
+  [x] create (POST /pets)
+  [x] nearby (GET /pets/nearby)
+  [x] filtered-nearby (GET /pets/nearby/filter)

@@ -83,7 +83,5 @@ describe('Fetch Nearby Pets With Filter Use Case', () => {
     expect(pets).toHaveLength(2);
     expect(pets[0].name).toEqual('Thor');
     expect(pets[1].name).toEqual('Jack');
-    expect(pets[0].size).toEqual('PEQUENO');
-    expect(pets[1].size).toEqual('PEQUENO');
   });
 });

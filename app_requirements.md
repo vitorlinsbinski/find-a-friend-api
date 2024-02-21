@@ -18,7 +18,7 @@
 
 ## Requisitos não funcionais
 
-[] A senha da organização cadastrada deve estar criptografada no banco de dados
-[] Para autenticação da organização, deve-se utilizar JWT como token de acesso
+[x] A senha da organização cadastrada deve estar criptografada no banco de dados
+[x] Para autenticação da organização, deve-se utilizar JWT como token de acesso
 [x] Os dados da aplicação devem estar persistidos em um banco PostgreSQL
 [] A lista de pets por cidade e estado devem ser trazidas em intervalos de 20 items por página

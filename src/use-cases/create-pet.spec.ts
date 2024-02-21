@@ -59,15 +59,9 @@ describe('Create Pet Use Case', () => {
       state: organizationAddress.state,
       organization_id: organizationRegistered.id,
       adoption_requirements: [
-        {
-          title: 'Requirement 1',
-        },
-        {
-          title: 'Requirement 2',
-        },
-        {
-          title: 'Requirement 3',
-        },
+        'requirement 1',
+        'requirement 2',
+        'requirement 3',
       ],
     });
 
