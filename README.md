@@ -75,7 +75,7 @@
 
 ### Organizations
 
-• Register an organization
+1. Register an organization
 
 ```bash
     POST /organizations
@@ -100,7 +100,7 @@ interface BodyRequest {
 }
 ```
 
-• Authenticate an organization
+2. Authenticate an organization
 
 ```bash
    POST /organizations
@@ -108,7 +108,7 @@ interface BodyRequest {
 
 Send the email and the password through body request.
 
-• Organization Profile
+3. Organization Profile
 
 ```bash
    GET /organizations/profile
@@ -120,7 +120,7 @@ Select 'Bearer' Auth type sending the token that was returned in the authenticat
     'Bearer {token}'
 ```
 
-• Refresh token
+4. Refresh token
 
 ```bash
    PATCH /organizations/token/refresh
@@ -128,7 +128,7 @@ Select 'Bearer' Auth type sending the token that was returned in the authenticat
 
 ### Pets
 
-• Create a pet
+1. Create a pet
 
 ```bash
    POST /pets
@@ -155,7 +155,7 @@ interface BodyRequest {
 }
 ```
 
-• Pet details
+2. Pet details
 
 ```bash
    GET /pets/:id
@@ -169,7 +169,7 @@ Example:
    GET /pets/pet-01
 ```
 
-• Fetch pets in the city
+3. Fetch pets in the city
 
 ```bash
    GET /pets/nearby
@@ -183,7 +183,7 @@ Example:
    GET /pets/nearby?city=Rio%20de%20Janeiro&state=RJ
 ```
 
-• Fetch pets in the city with filters
+4. Fetch pets in the city with filters
 
 ```bash
    GET /pets/nearby/filter
