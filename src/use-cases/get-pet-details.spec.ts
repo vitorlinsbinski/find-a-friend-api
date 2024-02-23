@@ -7,11 +7,13 @@ import { FetchNearbyPetsWithFilterUseCase } from './fetch-nearby-pets-with-filte
 import { GetPetDetailsUseCase } from './get-pet-details';
 import { ResourceNotFoundError } from './erros/resource-not-found-error';
 import { InMemoryAdoptionRequirementsRepository } from '@/repositories/in-memory/in-memory-adoption-requirements-repository';
+import { InMemoryPetImagesRepository } from '@/repositories/in-memory/in-memory-pet-images-repository';
 
 let organizationsRepository: InMemoryOrganizationsRepository;
 let addressesRepository: InMemoryAddressesRepository;
 let petsRepository: InMemoryPetsRepository;
 let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
+let petImagesRepository: InMemoryPetImagesRepository;
 let sut: GetPetDetailsUseCase;
 
 describe('Get Pet Details by ID Use Case', () => {
@@ -21,10 +23,12 @@ describe('Get Pet Details by ID Use Case', () => {
     petsRepository = new InMemoryPetsRepository();
     adoptionRequirementsRepository =
       new InMemoryAdoptionRequirementsRepository();
+    petImagesRepository = new InMemoryPetImagesRepository();
 
     sut = new GetPetDetailsUseCase(
       petsRepository,
-      adoptionRequirementsRepository
+      adoptionRequirementsRepository,
+      petImagesRepository
     );
   });
 
@@ -47,7 +51,7 @@ describe('Get Pet Details by ID Use Case', () => {
       organization_id: organization.id,
     });
 
-    await petsRepository.create({
+    const pet01 = await petsRepository.create({
       id: 'pet-01',
       name: 'Thor',
       about: "Thor's about",
@@ -58,9 +62,15 @@ describe('Get Pet Details by ID Use Case', () => {
       city: organizationAddress.city,
       state: organizationAddress.state,
       organization_id: organization.id,
+      cover_image_url_path: './pet_01_cover.png',
     });
 
-    await petsRepository.create({
+    await petImagesRepository.createMany([
+      { pet_id: pet01.id, url_path: './pet_01img_01.png' },
+      { pet_id: pet01.id, url_path: './pet_01img_02.png' },
+    ]);
+
+    const pet02 = await petsRepository.create({
       id: 'pet-02',
       name: 'Max',
       about: "Max's about",
@@ -71,9 +81,15 @@ describe('Get Pet Details by ID Use Case', () => {
       city: organizationAddress.city,
       state: organizationAddress.state,
       organization_id: organization.id,
+      cover_image_url_path: './pet_02_cover.png',
     });
 
-    await petsRepository.create({
+    await petImagesRepository.createMany([
+      { pet_id: pet02.id, url_path: './pet_02img_01.png' },
+      { pet_id: pet02.id, url_path: './pet_02img_02.png' },
+    ]);
+
+    const pet03 = await petsRepository.create({
       id: 'pet-03',
       name: 'Jack',
       about: "Jack's about",
@@ -84,14 +100,38 @@ describe('Get Pet Details by ID Use Case', () => {
       city: organizationAddress.city,
       state: organizationAddress.state,
       organization_id: organization.id,
+      cover_image_url_path: './pet_03_cover.png',
     });
 
-    const { pet } = await sut.execute({
+    await petImagesRepository.createMany([
+      { pet_id: pet03.id, url_path: './pet_03img_01.png' },
+      { pet_id: pet03.id, url_path: './pet_03img_02.png' },
+    ]);
+
+    const { pet, petImages } = await sut.execute({
       petId: 'pet-02',
     });
 
-    expect(pet.id).toEqual('pet-02');
-    expect(pet.name).toEqual('Max');
+    expect(pet).toEqual(
+      expect.objectContaining({
+        id: 'pet-02',
+        name: 'Max',
+        cover_image_url_path: './pet_02_cover.png',
+      })
+    );
+
+    expect(petImages).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          pet_id: 'pet-02',
+          url_path: './pet_02img_01.png',
+        }),
+        expect.objectContaining({
+          pet_id: 'pet-02',
+          url_path: './pet_02img_02.png',
+        }),
+      ])
+    );
   });
 
   it('should not be able to get pet details with a nonexistent pet ID', async () => {

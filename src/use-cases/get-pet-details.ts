@@ -1,7 +1,8 @@
 import { PetsRepository } from '@/repositories/pets-repository';
-import { AdoptionRequirement, Pet } from '@prisma/client';
+import { AdoptionRequirement, Pet, PetImage } from '@prisma/client';
 import { ResourceNotFoundError } from './erros/resource-not-found-error';
 import { AdoptionRequirementsRepository } from '@/repositories/adoption-requirements-repository';
+import { PetImagesRepository } from '@/repositories/pet-images-repository';
 
 interface GetPetDetailsUseCaseRequest {
   petId: string;
@@ -10,12 +11,14 @@ interface GetPetDetailsUseCaseRequest {
 interface GetPetDetailsUseCaseResponse {
   pet: Pet;
   adoptionRequirements: AdoptionRequirement[];
+  petImages: PetImage[];
 }
 
 export class GetPetDetailsUseCase {
   constructor(
     private petsRepository: PetsRepository,
-    private adoptionRequirementsRepository: AdoptionRequirementsRepository
+    private adoptionRequirementsRepository: AdoptionRequirementsRepository,
+    private petImagesRepository: PetImagesRepository
   ) {}
 
   async execute({
@@ -30,6 +33,9 @@ export class GetPetDetailsUseCase {
     const adoptionRequirements =
       await this.adoptionRequirementsRepository.findManyByPetId(petId);
 
-    return { pet, adoptionRequirements };
+    const petImages =
+      await this.petImagesRepository.fetchPetImagesByPetId(petId);
+
+    return { pet, adoptionRequirements, petImages };
   }
 }

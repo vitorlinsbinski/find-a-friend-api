@@ -36,6 +36,7 @@ export async function createPets() {
       city: firstOrgAddress.city,
       state: firstOrgAddress.state,
       organization_id: firstOrg.id,
+      cover_image_url_path: './pet-01.png',
     },
   });
 
@@ -51,6 +52,7 @@ export async function createPets() {
       city: firstOrgAddress.city,
       state: firstOrgAddress.state,
       organization_id: firstOrg.id,
+      cover_image_url_path: './pet-02.png',
     },
   });
 
@@ -88,6 +90,7 @@ export async function createPets() {
       city: secondOrgAddress.city,
       state: secondOrgAddress.state,
       organization_id: secondOrg.id,
+      cover_image_url_path: './pet-03.png',
     },
   });
 
@@ -103,6 +106,7 @@ export async function createPets() {
       city: secondOrgAddress.city,
       state: secondOrgAddress.state,
       organization_id: secondOrg.id,
+      cover_image_url_path: './pet-04.png',
     },
   });
 
@@ -118,6 +122,7 @@ export async function createPets() {
       city: secondOrgAddress.city,
       state: secondOrgAddress.state,
       organization_id: secondOrg.id,
+      cover_image_url_path: './pet-05.png',
     },
   });
 }

@@ -19,8 +19,6 @@ export async function nearbyWithFilter(
   const { city, state, independency_level, size, age, energy_level } =
     fetchNearbyPetsWithFilterQuerySchema.parse(request.query);
 
-  console.log('AQUI', city, state, independency_level, size, age, energy_level);
-
   const fetchNearbyPetsUseCaseWithFilter =
     makeFetchNearbyPetsWithFilterUseCase();
 

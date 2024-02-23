@@ -7,11 +7,14 @@ import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-
 import { AdoptionRequirementsRepository } from '@/repositories/adoption-requirements-repository';
 import { InMemoryAdoptionRequirementsRepository } from '@/repositories/in-memory/in-memory-adoption-requirements-repository';
 import { NonExistingOrganizationError } from './erros/nonexisting-organization-error';
+import { PetImagesRepository } from '@/repositories/pet-images-repository';
+import { InMemoryPetImagesRepository } from '@/repositories/in-memory/in-memory-pet-images-repository';
 
 let organizationsRepository: InMemoryOrganizationsRepository;
 let addressesRepository: InMemoryAddressesRepository;
 let petsRepository: InMemoryPetsRepository;
-let adoptionRequirementsRepository: AdoptionRequirementsRepository;
+let adoptionRequirementsRepository: InMemoryAdoptionRequirementsRepository;
+let petImagesRepository: InMemoryPetImagesRepository;
 let sut: CreatePetUseCase;
 
 describe('Create Pet Use Case', () => {
@@ -19,12 +22,14 @@ describe('Create Pet Use Case', () => {
     organizationsRepository = new InMemoryOrganizationsRepository();
     addressesRepository = new InMemoryAddressesRepository();
     petsRepository = new InMemoryPetsRepository();
+    petImagesRepository = new InMemoryPetImagesRepository();
     adoptionRequirementsRepository =
       new InMemoryAdoptionRequirementsRepository();
 
     sut = new CreatePetUseCase(
       petsRepository,
       adoptionRequirementsRepository,
+      petImagesRepository,
       organizationsRepository
     );
   });
@@ -63,6 +68,12 @@ describe('Create Pet Use Case', () => {
         'requirement 2',
         'requirement 3',
       ],
+      cover_image_url_path: './dog_cover.png',
+      images: [
+        { url_path: './dog_01.png' },
+        { url_path: './dog_01.png' },
+        { url_path: './dog_01.png' },
+      ],
     });
 
     expect(pet.id).toEqual(expect.any(String));
@@ -81,6 +92,12 @@ describe('Create Pet Use Case', () => {
         city: 'São Paulo',
         state: 'SP',
         organization_id: 'nonexisting-org-id',
+        cover_image_url_path: './dog_cover.png',
+        images: [
+          { url_path: './dog_01.png' },
+          { url_path: './dog_01.png' },
+          { url_path: './dog_01.png' },
+        ],
       })
     ).rejects.toBeInstanceOf(NonExistingOrganizationError);
   });

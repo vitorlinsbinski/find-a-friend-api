@@ -55,16 +55,17 @@ enum PetAge {
 }
 
 model Pet {
-  id                 String            @id @default(uuid())
-  name               String
-  about              String            @db.Text
-  age                PetAge
-  size               PetSize
-  energy_level       Int
-  independency_level PetIndepencyLevel
-  environment        String?
-  city               String
-  state              String
+  id                   String            @id @default(uuid())
+  name                 String
+  about                String            @db.Text
+  age                  PetAge
+  size                 PetSize
+  energy_level         Int
+  independency_level   PetIndepencyLevel
+  environment          String?
+  city                 String
+  state                String
+  cover_image_url_path String
 
   organization        Organization          @relation(fields: [organization_id], references: [id])
   organization_id     String
