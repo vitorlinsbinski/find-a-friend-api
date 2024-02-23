@@ -9,9 +9,10 @@ interface GetPetDetailsUseCaseRequest {
 }
 
 interface GetPetDetailsUseCaseResponse {
-  pet: Pet;
-  adoptionRequirements: AdoptionRequirement[];
-  petImages: PetImage[];
+  pet: Pet & {
+    adoptionRequirements: AdoptionRequirement[];
+    images: PetImage[];
+  };
 }
 
 export class GetPetDetailsUseCase {
@@ -36,6 +37,12 @@ export class GetPetDetailsUseCase {
     const petImages =
       await this.petImagesRepository.fetchPetImagesByPetId(petId);
 
-    return { pet, adoptionRequirements, petImages };
+    return {
+      pet: {
+        ...pet,
+        adoptionRequirements,
+        images: petImages,
+      },
+    };
   }
 }

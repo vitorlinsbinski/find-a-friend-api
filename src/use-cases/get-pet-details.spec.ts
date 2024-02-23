@@ -108,7 +108,7 @@ describe('Get Pet Details by ID Use Case', () => {
       { pet_id: pet03.id, url_path: './pet_03img_02.png' },
     ]);
 
-    const { pet, petImages } = await sut.execute({
+    const { pet } = await sut.execute({
       petId: 'pet-02',
     });
 
@@ -117,20 +117,17 @@ describe('Get Pet Details by ID Use Case', () => {
         id: 'pet-02',
         name: 'Max',
         cover_image_url_path: './pet_02_cover.png',
+        images: [
+          expect.objectContaining({
+            pet_id: 'pet-02',
+            url_path: './pet_02img_01.png',
+          }),
+          expect.objectContaining({
+            pet_id: 'pet-02',
+            url_path: './pet_02img_02.png',
+          }),
+        ],
       })
-    );
-
-    expect(petImages).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          pet_id: 'pet-02',
-          url_path: './pet_02img_01.png',
-        }),
-        expect.objectContaining({
-          pet_id: 'pet-02',
-          url_path: './pet_02img_02.png',
-        }),
-      ])
     );
   });
 

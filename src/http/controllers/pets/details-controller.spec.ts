@@ -25,17 +25,15 @@ describe('Details Controller (e2e)', () => {
       expect.objectContaining({
         id: petId,
         name: petName,
+        images: [
+          expect.objectContaining({
+            url_path: './img_01.png',
+          }),
+          expect.objectContaining({
+            url_path: './img_02.png',
+          }),
+        ],
       })
-    );
-    expect(response.body.petImages).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          url_path: './img_01.png',
-        }),
-        expect.objectContaining({
-          url_path: './img_02.png',
-        }),
-      ])
     );
   });
 });

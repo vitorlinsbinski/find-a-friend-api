@@ -48,6 +48,7 @@ describe('Fetch Nearby Pets Use Case', () => {
       city: firstOrganizationAddress.city,
       state: firstOrganizationAddress.state,
       organization_id: firstOrganization.id,
+      cover_image_url_path: 'cover_img.png',
     });
 
     const secondOrganization = await organizationsRepository.create({
@@ -78,6 +79,7 @@ describe('Fetch Nearby Pets Use Case', () => {
       city: secondOrganizationAddress.city,
       state: secondOrganizationAddress.state,
       organization_id: secondOrganization.id,
+      cover_image_url_path: 'cover_img.png',
     });
 
     const { pets } = await sut.execute({

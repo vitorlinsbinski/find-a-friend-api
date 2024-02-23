@@ -9,6 +9,7 @@ interface FetchNearbyPetsUseCaseResponse {
   pets: {
     id: string;
     name: string;
+    about: string;
     organization_id: string;
   }[];
 }
@@ -23,7 +24,7 @@ export class FetchNearbyPetsUseCase {
     const pets = await this.petsRepository.findManyNearby({ city, state });
 
     const petsFormatted = pets.map((item) => {
-      const { id, name, about, organization_id,  } = item;
+      const { id, name, about, organization_id } = item;
 
       return {
         id,
