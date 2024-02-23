@@ -48,28 +48,28 @@
 
 • Functional Requirements
 
-[x] Deve ser possível cadastrar um pet
-[x] Deve ser possível listar todos os pets disponíveis para adoção em uma cidade
-[x] Deve ser possível filtrar pets por suas características
-[x] Deve ser possível visualizar detalhes de um pet para adoção
-[x] Deve ser possível se cadastrar como uma ORG
-[x] Deve ser possível realizar login como uma ORG
+- [x] It should be possible to register a pet.
+- [x] It should be possible to list all pets available for adoption in a city.disponíveis para adoção em uma cidade
+- [x] It should be possible to filter pets by their characteristics.
+- [x] It should be possible to view details of a pet for adoption.
+- [x] It should be possible to register as an organization (ORG).
+- [x] It should be possible to log in as an organization (ORG).
 
 • Business rules
 
-[x] Para listar os pets, obrigatoriamente precisamos informar a cidade
-[x] Uma ORG precisa ter um endereço e um número de WhatsApp
-[x] Um pet deve estar ligado a uma ORG
-[x] O usuário que quer adotar, entrará em contato com a ORG via WhatsApp
-[x] Todos os filtros, além da cidade, são opcionais
-[] Para uma ORG acessar a aplicação como admin, ela precisa estar logada
+- [x] To list pets, it is mandatory to provide the city.
+- [x] An organization (ORG) needs to have an address and a WhatsApp number.
+- [x] A pet must be associated with an organization (ORG).
+- [x] The user who wants to adopt will contact the organization (ORG) via WhatsApp.
+- [x] All filters, besides the city, are optional.
+- [x] For an organization (ORG) to access the application as an admin, it needs to be logged in.
 
 • Non-Functional Requirements
 
-[x] A senha da organização cadastrada deve estar criptografada no banco de dados
-[x] Para autenticação da organização, deve-se utilizar JWT como token de acesso
-[x] Os dados da aplicação devem estar persistidos em um banco PostgreSQL
-[] A lista de pets por cidade e estado devem ser trazidas em intervalos de 20 items por página
+- [x] The password of the registered organization must be encrypted in the database.
+- [x] JWT should be used as the access token for organization authentication.
+- [x] Application data must be persisted in a PostgreSQL database.
+- [] The list of pets by city and state should be fetched in intervals of 20 items per page.
 
 ## API endpoints
 
