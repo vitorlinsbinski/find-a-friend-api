@@ -42,7 +42,7 @@
 
 <p>Right below you can check out the database model and the relationship between tables: </p>
 
-<img src="./assets/database-model.png/>
+<img src="./assets/database-model.png"/>
 
 ## App Requirements and Business Rules
 
@@ -242,7 +242,7 @@ Example:
     npm run test:e2e
 ```
 
-Disclaimer: it's better to run this application if you are using Unix-based operational Systems, like Linux, MacOS or even WSL 2. 
+Disclaimer: it's better to run this application if you are using Unix-based operational Systems, like Linux, MacOS or even WSL 2.
 
 ## Main Technologies
 
