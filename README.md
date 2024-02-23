@@ -49,7 +49,7 @@
 • Functional Requirements
 
 - [x] It should be possible to register a pet.
-- [x] It should be possible to list all pets available for adoption in a city.disponíveis para adoção em uma cidade
+- [x] It should be possible to list all pets available for adoption in a city.
 - [x] It should be possible to filter pets by their characteristics.
 - [x] It should be possible to view details of a pet for adoption.
 - [x] It should be possible to register as an organization (ORG).
