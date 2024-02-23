@@ -64,7 +64,7 @@
 [x] Todos os filtros, além da cidade, são opcionais
 [] Para uma ORG acessar a aplicação como admin, ela precisa estar logada
 
-## Non-Functional Requirements
+• Non-Functional Requirements
 
 [x] A senha da organização cadastrada deve estar criptografada no banco de dados
 [x] Para autenticação da organização, deve-se utilizar JWT como token de acesso
