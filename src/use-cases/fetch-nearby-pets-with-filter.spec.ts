@@ -48,6 +48,7 @@ describe('Fetch Nearby Pets With Filter Use Case', () => {
       city: organizationAddress.city,
       state: organizationAddress.state,
       organization_id: organization.id,
+      cover_image_url_path: 'cover_img.png',
     });
 
     await petsRepository.create({
@@ -60,6 +61,7 @@ describe('Fetch Nearby Pets With Filter Use Case', () => {
       city: organizationAddress.city,
       state: organizationAddress.state,
       organization_id: organization.id,
+      cover_image_url_path: 'cover_img.png',
     });
 
     await petsRepository.create({
@@ -72,6 +74,7 @@ describe('Fetch Nearby Pets With Filter Use Case', () => {
       city: organizationAddress.city,
       state: organizationAddress.state,
       organization_id: organization.id,
+      cover_image_url_path: 'cover_img.png',
     });
 
     const { pets } = await sut.execute({
