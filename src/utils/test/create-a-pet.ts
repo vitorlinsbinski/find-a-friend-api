@@ -29,7 +29,7 @@ export async function createAPet({ id, name }: createAPetProps) {
     },
   });
 
-  await prisma.pet.create({
+  const pet = await prisma.pet.create({
     data: {
       id: id,
       name: name,
@@ -41,6 +41,14 @@ export async function createAPet({ id, name }: createAPetProps) {
       city: organizationAddress.city,
       state: organizationAddress.state,
       organization_id: organization.id,
+      cover_image_url_path: './pet_cover.png',
     },
+  });
+
+  await prisma.petImage.createMany({
+    data: [
+      { url_path: './img_01.png', pet_id: pet.id },
+      { url_path: './img_02.png', pet_id: pet.id },
+    ],
   });
 }

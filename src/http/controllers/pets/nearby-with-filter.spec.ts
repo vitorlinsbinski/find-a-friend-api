@@ -12,7 +12,7 @@ describe('Nearby With Filter Controller (e2e)', () => {
     await app.close();
   });
 
-  it('should be able to get pet details with filter', async () => {
+  it('should be able to get pets  with filter', async () => {
     await createPets();
 
     const response = await request(app.server)

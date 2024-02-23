@@ -13,6 +13,12 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     independency_level: z.enum(['BAIXO', 'MEDIO', 'ALTO']),
     environment: z.string().optional(),
     adoption_requirements: z.array(z.string()).optional(),
+    cover_image_url_path: z.string(),
+    images: z.array(
+      z.object({
+        url_path: z.string(),
+      })
+    ),
   });
 
   const {
@@ -24,6 +30,8 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     independency_level,
     environment,
     adoption_requirements,
+    cover_image_url_path,
+    images,
   } = createPetBodySchema.parse(request.body);
 
   const getOrganizationProfileUseCase = makeGetOrganizationProfileUseCase();
@@ -49,6 +57,8 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       city,
       state,
       organization_id: id,
+      cover_image_url_path,
+      images,
     });
 
     return reply.status(201).send();

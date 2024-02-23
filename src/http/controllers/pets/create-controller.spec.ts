@@ -30,6 +30,15 @@ describe('Create Controller (e2e)', () => {
           'requirement 2',
           'requirement 3',
         ],
+        cover_image_url_path: './thor_cover.png',
+        images: [
+          {
+            url_path: './thor_img_01.png',
+          },
+          {
+            url_path: './thor_img_01.png',
+          },
+        ],
       });
 
     expect(response.statusCode).toEqual(201);

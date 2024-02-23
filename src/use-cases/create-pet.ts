@@ -3,10 +3,7 @@ import { OrganizationsRepository } from '@/repositories/organizations-repository
 import { PetsRepository } from '@/repositories/pets-repository';
 import { Pet } from '@prisma/client';
 import { NonExistingOrganizationError } from './erros/nonexisting-organization-error';
-
-interface AdotionRequirement {
-  title: string;
-}
+import { PetImagesRepository } from '@/repositories/pet-images-repository';
 
 interface CreatePetUseCaseRequest {
   name: string;
@@ -20,6 +17,10 @@ interface CreatePetUseCaseRequest {
   state: string;
   organization_id: string;
   adoption_requirements?: string[];
+  cover_image_url_path: string;
+  images: {
+    url_path: string;
+  }[];
 }
 
 interface CreatePetUseCaseResponse {
@@ -30,6 +31,7 @@ export class CreatePetUseCase {
   constructor(
     private petsRepository: PetsRepository,
     private adoptionRequirementsRepository: AdoptionRequirementsRepository,
+    private petImagesRepository: PetImagesRepository,
     private organizationsRepository: OrganizationsRepository
   ) {}
 
@@ -45,6 +47,8 @@ export class CreatePetUseCase {
     state,
     organization_id,
     adoption_requirements,
+    cover_image_url_path,
+    images,
   }: CreatePetUseCaseRequest): Promise<CreatePetUseCaseResponse> {
     const organization =
       await this.organizationsRepository.findById(organization_id);
@@ -64,6 +68,7 @@ export class CreatePetUseCase {
       city,
       state,
       organization_id,
+      cover_image_url_path,
     });
 
     if (adoption_requirements) {
@@ -76,6 +81,15 @@ export class CreatePetUseCase {
 
       await this.adoptionRequirementsRepository.create(adoptionRequirements);
     }
+
+    const petImages = images.map((image) => {
+      return {
+        url_path: image.url_path,
+        pet_id: pet.id,
+      };
+    });
+
+    await this.petImagesRepository.createMany(petImages);
 
     return { pet };
   }

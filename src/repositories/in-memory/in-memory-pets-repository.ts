@@ -78,6 +78,7 @@ export class InMemoryPetsRepository implements PetsRepository {
       city: data.city,
       state: data.state,
       organization_id: data.organization_id,
+      cover_image_url_path: data.cover_image_url_path,
     };
 
     this.items.push(pet);
